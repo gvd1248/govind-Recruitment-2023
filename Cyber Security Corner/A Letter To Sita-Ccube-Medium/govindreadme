@@ -1,31 +1,29 @@
-def toBinary(s):                                          # Function for converting the strings to binary 
-    res = ''.join(format(ord(i), '08b') for i in s)         
-    return res
-def xor(a, b, n):                                         # Function for decrypting OTP by doing XOR
-    
-    ans = ""
-    reps = 1 + (len(a) // len(b))                  # To do XOR both the strings should be of equal length
-    b = b * reps                                   #  but the length of key is less than enc text,so repetioin is done to the key 
+coded="Nkhzn},cwe0P$wxmpp$viqiqfiv$xli$he}${lir$}sy$wipjpiwwp}$jspps{ih$qi$mrxs$xli$jsviwx0$piezmrk$filmrh$xli$gsqjsvxw$sj$xli$tepegi2Dlir$jexi$xiwxih$syv$pszi$erh$witevexih$yw0$q}$lievx$wlexxivih$mrxs$e$xlsywerh$tmigiw2$]li$temr$sj$fimrk$e{e}$jvsq$}sy0$q}$pmji+w$gsqtermsr0${ew$yrfievefpi2Pr$iziv}$qsqirx$sj$wspmxyhi0$q}$xlsyklxw$lezi$fiir$gsrwyqih$f}$}syv${ipp1fimrk2$P$tvsqmwi$}sy0$q}$fipszih0$xlex$P${mpp$rsx$viwx$yrxmp$P$lezi$jypjmppih$q}$hyx}$erh$viwxsvih$}sy$xs$}syv$vmklxjyp$tpegi$f}$q}$wmhi2\rxmp$xli$he}${i$evi$viyrmxih0$qe}$xli$kshw${exgl$sziv$}sy0$erh$qe}$}sy$jmrh$wspegi$mr$xli$ors{pihki$xlex$q}$pszi$jsv$}sy$ors{w$rs$fsyrhw2$Qsph$sr$xs$xli$qiqsvmiw$sj$syv$pszi0$jsv$xli}${mpp$wywxemr$yw$xlvsykl$xli$xvmepw$xlex$pmi$elieh2Dmxl$epp$xli$pszi$mr$q}$lievx0Fsyv$[eq"
 
-    for i in range(n):                                    # this for loop does the main task: bitwise XORing
-        if (a[i] == b[i]):
-            ans += "0"
+
+A=[]                  #creating empty list A
+def first(input):     #defining the first fucntion
+    for i in range(len(input)):  #for loop to loop through the till the length of input
+        if(i<11):                
+            A.append(chr(ord(input[i])-i-5))#reversing what the encoding fucntion did
         else:
-            ans += "1"
-    
-    bytes_= []
-    for i in range(0, len(ans), 8):                       # Converting the result which is binary into bytes for converting to ascii  charecters
-        bytes_.append(ans[i:i+8])
-        
-    ascii_chars = ""                                      
-    for i in bytes_:                                      # Converting to ASCII and joining the the characters to get the coordinates
-        ascii_chars += chr(int(i, 2))    
-    
-    return ascii_chars
+            A.append(chr(ord(input[i])-4))  #reversing what the encoding fucntion did
+    return(''.join(A))    #joins a to form a string
+def second(input):
+    at=[]
+    for i in range(len(input)):           #for loop to loop through the till the length of input
+        at.append(chr(ord(input[i])^1))   #reversing what the encoding fucntion did
+    return(''.join(at))      #joins a to form a string
+def third(text,s):
+    res=""
+    for i in range(len(text)):
+        char = text[i]
+        if(char.isnumeric()):           #checks if the character is numeric
+            res+=(chr(ord(char)+1))
+        elif(char.isupper()):           #checks if the character is upper
+            res += chr((ord(char)-s-65) % 26 + 65)
+        else:
+            res+=(chr(ord(char)^1))
+    return res
+print(third(second(first(coded)),4))   #calling all the functions according to the order in which they were encoded.
 
-enc_text=toBinary("|OP`Z<E]|Y\$")                  
-key=toBinary("Jai Shree Ram!")                            
-
-n = len(enc_text)
-c = xor(enc_text, key, n)
-print(c)
