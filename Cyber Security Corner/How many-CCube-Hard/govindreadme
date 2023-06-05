@@ -1,0 +1,32 @@
+#!/bin/bash
+
+f="user.txt"
+a=0                                       # declaring a variable to store the  number of users
+
+
+while read -r line                         #while loop to iterate though each line of user.txt
+do
+    if [[ $line == *553* ]]; then          #if condition to check if number is there in the line.
+        ((a=a+1))                          #increments the value of the variable with 1 if condition is true
+    fi
+
+    if [[ $line == *828* ]]; then
+        ((a=a+1))
+    fi
+
+    if [[ $line == *723* ]]; then
+        ((a=a+1))
+    fi
+
+    if [[ $line == *698* ]]; then
+        ((a=a+1))
+    fi
+done < "$f"                              #used to input users.txt in the while loop.
+
+
+
+
+echo "Total count of user IDs are: $a"  # output
+
+We need to find the people with the given user ids.We use while loop to iterate through each line and then use if conditions to check through 
+each id.finally the total number is printed.
